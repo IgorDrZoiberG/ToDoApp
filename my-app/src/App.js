@@ -1,75 +1,106 @@
 import React from 'react';
-import NewTask from "./components/NewTask";
+import './App.css'
 
 class App extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            tasks: [
-                {name: 'buy bread', flag: true},
-                {name: 'buy milk', flag: false},
-                {name: 'buy sugar', flag: true}
+            todos: [
+                {name: 'Полететь на Марс', checked: false},
+                {name: 'Полететь на Луну', checked: true},
+                {name: 'Полететь на Солнце', checked: false},
             ],
-            newTaskText: ''
+            value: null
         };
     }
+    deleteItemHandler = (id) => {
+        console.log(id)
+        const todo = this.state.todos.filter(( item ,index) => index !== id);
+        this.setState({todos: [...todo]});
+        console.log(todo)
 
-    onToggleHandler = (i) => {
-        const tasks = this.state.tasks.map((task, index) => {
-            if (i === index) {
-                return {
-                    name: task.name,
-                    flag: !task.flag
-                }
-            }
-            else return task
-        });
-        this.setState({tasks})
+
     };
-    addTaskHandler = () => {
-        const tasks = this.state.tasks;
-        tasks.push({
-            name: this.state.newTaskText,
-            flag: false
+
+    toggleFlagHandler = (id) => {
+        const todos = this.state.todos.map((item, index) => {
+            if (id === index) {
+                return {
+                    name: item.name,
+                    checked: !item.checked
+                }
+            } else return item
         });
-        this.setState({
-            tasks,
-            newTaskText: ''
-        })
+        this.setState({todos})
+    };
+
+
+    createToDoItem = (e) => {
+        const todos = this.state.todos;
+        todos.push({
+            name: this.state.value,
+            checked: false
+        });
+        e.target.value = null;
+        this.setState({todos})
+    };
+
+    addToDoItem = () => {
+
     };
 
     render() {
         return (
-            <>
-                <h1>Todo List</h1>
-            <ol>
-                {this.state.tasks.map((task, index) => {
-                    return (
-                     <NewTask
-                     key = {index}
-                     name = {task.name}
-                     flag = {task.flag}
-                     onToggleHandler = {this.onToggleHandler.bind(this,index)}
-                     />
-                    )
-                })
-                }
-            </ol>
-                <input
-                    type='text'
-                    placeholder='new task'
-                    onChange = {ev=>this.setState({newTaskText: ev.target.value })}
-                    value = {this.state.newTaskText}
-                    onKeyUp={ev=>{
-                        if (ev.keyCode === 13) {
-                            this.addTaskHandler();
-                        }
-                    }}
-                />
-                </>
+            <div className='main'>
+                <div className='tasks'>
+                    <h1>ToDo List</h1>
+                    {this.state.todos.map((item, index) => {
+                       const classes = item.checked ? 'check' : null;
+                        return (
+                            <div className='qwerty'>
+                            <li
+                                key={index}
+                                className={classes}
+                                // onClick={()=> this.toggleFlagHandler(index)}
+                            >
 
+                                {item.name}
+
+
+
+                            </li>
+                            <span
+                        className='delete'
+                        onClick={()=>this.deleteItemHandler(index)}
+                    >
+                        x</span>
+                            </div>
+
+                        )
+                    })}
+                    <input type="text"
+                           placeholder='Введите новую задачу'
+                           onChange={(e) => this.setState({value: e.target.value})}
+                           onKeyDown={(e) => {
+                               if (e.keyCode === 13 && e.target.value.length !== 0) {
+                                   this.createToDoItem(e)
+                               }
+                           }}
+                    />
+                    <button className='btn'
+                            onClick={() => this.addToDoItem()}
+                    >
+                        Добавить
+                    </button>
+
+
+                </div>
+
+            </div>
         )
     }
 }
+
 
 export default App;
