@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css'
+import './App.css';
+import NewTask from "./components/NewTask";
+
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -14,13 +15,11 @@ class App extends React.Component {
             value: null
         };
     }
+
     deleteItemHandler = (id) => {
-        console.log(id)
-        const todo = this.state.todos.filter(( item ,index) => index !== id);
+        const todo = this.state.todos.filter((item, index) => index !== id);
         this.setState({todos: [...todo]});
         console.log(todo)
-
-
     };
 
     toggleFlagHandler = (id) => {
@@ -36,7 +35,7 @@ class App extends React.Component {
     };
 
 
-    createToDoItem = (e) => {
+    createToDoItemHandler = (e) => {
         const todos = this.state.todos;
         todos.push({
             name: this.state.value,
@@ -46,37 +45,23 @@ class App extends React.Component {
         this.setState({todos})
     };
 
-    addToDoItem = () => {
-
-    };
 
     render() {
         return (
             <div className='main'>
                 <div className='tasks'>
-                    <h1>ToDo List</h1>
+                    <h1>Задачи на сегодня</h1>
                     {this.state.todos.map((item, index) => {
-                       const classes = item.checked ? 'check' : null;
+
                         return (
-                            <div className='qwerty'>
-                            <li
+                            <NewTask
                                 key={index}
-                                className={classes}
-                                // onClick={()=> this.toggleFlagHandler(index)}
-                            >
+                                name={item.name}
+                                toggleFlagHandler={this.toggleFlagHandler.bind(this, index)}
+                                deleteItemHandler={this.deleteItemHandler.bind(this, index)}
+                                checked={item.checked}
 
-                                {item.name}
-
-
-
-                            </li>
-                            <span
-                        className='delete'
-                        onClick={()=>this.deleteItemHandler(index)}
-                    >
-                        x</span>
-                            </div>
-
+                            />
                         )
                     })}
                     <input type="text"
@@ -84,19 +69,11 @@ class App extends React.Component {
                            onChange={(e) => this.setState({value: e.target.value})}
                            onKeyDown={(e) => {
                                if (e.keyCode === 13 && e.target.value.length !== 0) {
-                                   this.createToDoItem(e)
+                                   this.createToDoItemHandler(e)
                                }
                            }}
                     />
-                    <button className='btn'
-                            onClick={() => this.addToDoItem()}
-                    >
-                        Добавить
-                    </button>
-
-
                 </div>
-
             </div>
         )
     }
