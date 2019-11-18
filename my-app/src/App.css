@@ -18,13 +18,23 @@ body {
 
 }
 
+h1 {
+    margin-bottom: 32px;
+    padding-bottom: 30px;
+    text-align: center;
+    color: #333;
+    margin-top: 8px;
+    font-family: 'Verdana', 'sans-serif';
+    border-bottom: 1px solid rgba(113, 113, 250, .2);
+}
+
 .tasks {
     position: relative;
     margin-top: 50px;
     width: 700px;
     height: max-content;
     max-height: max-content;
-    max-width: 100%;
+    max-width: 90%;
     padding: 30px;
     background: white;
     border-radius: 8px;
@@ -73,15 +83,6 @@ li:hover {
 
 }
 
-h1 {
-    margin-bottom: 32px;
-    padding-bottom: 30px;
-    text-align: center;
-    color: #333;
-    margin-top: 8px;
-    font-family: 'Verdana', 'sans-serif';
-    border-bottom: 1px solid rgba(113, 113, 250, .2);
-}
 
 input {
     margin-top: 32px;
@@ -97,5 +98,9 @@ input {
     border: none;
     background: #f1f3f4;
     font-family: 'Verdana', 'sans-serif';
+}
+
+i {
+    padding-top: 10px;
 }
 

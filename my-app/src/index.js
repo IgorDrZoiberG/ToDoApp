@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import {createStore} from "redux";
+import ToDoApp from "./components/ToDoApp";
+import todos from "./reducers/todos";
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(todos);
+
+
+ReactDOM.render(<ToDoApp store={store}/>, document.getElementById('root'));
 
