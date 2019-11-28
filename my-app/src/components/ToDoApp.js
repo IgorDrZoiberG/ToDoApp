@@ -7,9 +7,8 @@ import {connect} from "react-redux";
 
 const ToDoApp = ({addToDo, toggleFlag, deleteItem, todos}) => {
     return (
-        <div className='main'>
-            <div className='tasks'>
-
+        <div className='page'>
+            <div className='body'>
                 <ToDoList
                     todos={todos}
                     toggleFlag={toggleFlag}
@@ -33,8 +32,6 @@ const mapDispatchToProps = dispatch => {
         addToDo: (name) => dispatch(addToDo(name)),
         toggleFlag: (id) => dispatch(toggleFlag(id)),
         deleteItem: (index) => dispatch(deleteItem(index)),
-
-
     }
 };
 

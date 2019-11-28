@@ -3,7 +3,9 @@ import '../App.css'
 
 const AddToDo = ({addToDo}) => {
     return (
+
         <input type="text"
+               className= 'input'
                placeholder='Введите новую задачу'
                onKeyDown={e => {
                    if (e.keyCode === 13 && e.target.value.length !== 0) {
@@ -12,6 +14,7 @@ const AddToDo = ({addToDo}) => {
                    }
                }}
         />
+
     )
 
 };

@@ -5,31 +5,29 @@ const ToDoList = ({todos, toggleFlag, deleteItem}) => {
 
     return (
         <>
-            <h1>Задачи на сегодня</h1>
+             <div className= 'title'><h1>Задачи на сегодня</h1></div>
             {
                 todos.map((todos, index) => {
-
-                    const classes = todos.checked ? 'check' : null;
+                    const toggleCheck = todos.checked ? 'check' : null;
                     return (
                         <div
-                            className='todoList'
+                            className='list'
                             key={todos.id}>
+                            <div className= 'list__item'>
                             <li
-                                className={classes}
+                                className={toggleCheck}
                                 onClick={() => toggleFlag(todos.id)}
-
                             >
                                 {todos.name}
                             </li>
+                            </div>
 
                             <i
-                                className='fa fa-trash-o delete'
+                                className='fa fa-trash-o list__deleteItem'
                                 aria-hidden='true'
                                 onClick={() => deleteItem(index)}
                             >
-
                             </i>
-
                         </div>
                     )
                 })}
